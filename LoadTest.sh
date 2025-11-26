@@ -1,3 +1,5 @@
+source ./CreateLog.sh
+
 start_quiz() {
     local num_questions=5
     
@@ -110,6 +112,8 @@ ask_question() {
         echo -e "${RED}✗ 오답입니다. 정답은 '${answer}'입니다.${NC}"
         result="오답"
     fi
+
+    log_result "$category_name" "$question" "$user_answer" "$answer" "$result"
     
     sleep 2
 }
