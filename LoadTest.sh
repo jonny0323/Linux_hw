@@ -48,7 +48,35 @@ start_quiz() {
         
         ask_question "$question" "$answer" "$category_name"
     done
-    
+
     # 최종 결과
     show_result
+}
+
+# 결과 출력
+show_result() {
+    show_logo
+    echo -e "${BLUE}===== 퀴즈 결과 =====${NC}"
+    echo ""
+    echo -e "총 문제 수: ${total}문제"
+    echo -e "${GREEN}정답: ${correct}개${NC}"
+    echo -e "${RED}오답: $((total - correct))개${NC}"
+    
+    if [ $total -gt 0 ]; then
+        percentage=$((correct * 100 / total))
+        echo ""
+        echo -e "정답률: ${percentage}%"
+        
+        if [ $percentage -ge 80 ]; then
+            echo -e "${GREEN}🎉 훌륭해요!${NC}"
+        elif [ $percentage -ge 60 ]; then
+            echo -e "${YELLOW}👍 잘했어요!${NC}"
+        else
+            echo -e "${YELLOW}💪 조금만 더 힘내요!${NC}"
+        fi
+    fi
+    
+    echo ""
+    echo -n "계속하려면 Enter를 누르세요..."
+    read dummy < /dev/tty
 }
