@@ -80,3 +80,36 @@ show_result() {
     echo -n "계속하려면 Enter를 누르세요..."
     read dummy < /dev/tty
 }
+
+# 문제 출제
+ask_question() {
+    local question=$1
+    local answer=$2
+    local category_name=$3
+    
+    echo ""
+    echo -e "${BLUE}[${category_name}] 문제${NC}"
+    echo -e "${YELLOW}${question}${NC}"
+    echo ""
+    
+    # /dev/tty로 직접 입력받기
+    echo -n "답: "
+    read user_answer < /dev/tty
+    
+    # 정답 확인 (띄어쓰기 제거 후 비교)
+    user_answer=$(echo "$user_answer" | tr -d ' ')
+    answer=$(echo "$answer" | tr -d ' ')
+    
+    total=$((total + 1))
+    
+    if [ "$user_answer" = "$answer" ]; then
+        echo -e "${GREEN}✓ 정답입니다!${NC}"
+        correct=$((correct + 1))
+        result="정답"
+    else
+        echo -e "${RED}✗ 오답입니다. 정답은 '${answer}'입니다.${NC}"
+        result="오답"
+    fi
+    
+    sleep 2
+}
