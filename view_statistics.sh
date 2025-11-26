@@ -1,4 +1,6 @@
 view_statistics() {
+    show_logo
+    
     if [ ! -f "$LOG_FILE" ]; then
         echo -e "${YELLOW}아직 기록이 없습니다.${NC}"
         sleep 2
