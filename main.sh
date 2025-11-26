@@ -15,6 +15,14 @@ LOG_FILE="log.txt"
 correct=0
 total=0
 
+# ========================================
+# 다른 파일의 함수들 불러오기
+# ========================================
+source ./view_logs.sh
+source ./view_statistics.sh
+source ./loadtest.sh
+source ./log_result.sh
+
 # 로고 출력
 show_logo() {
     clear
@@ -24,7 +32,6 @@ show_logo() {
     echo "================================"
     echo -e "${NC}"
 }
-
 
 # 프로그램 종료
 exit_program() {
